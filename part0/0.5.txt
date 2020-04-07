@@ -1,0 +1,8 @@
+title Form POST Request
+
+Client->Server: GET /spa
+note left of Client: script tag executed,\nrequest spa.js
+Client->Server: GET /spa.js
+note left of Client: spa.js executed
+Client->Server: GET /data.json
+note left of Client: JS adds table elements\nwith notes on HTML
