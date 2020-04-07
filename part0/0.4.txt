@@ -1,0 +1,11 @@
+title Form POST Request
+
+note left of Client: User writes note in input box
+Client->Server: POST request with note content
+note right of Server: Updates data.json
+Server->Client: Returns 302 - Redirect to /notes
+Client->Server: GET /notes
+Client->Server: GET main.css
+Client->Server: GET main.js
+note left of Client: JavaScript is executed
+Client->Server: GET data.json
