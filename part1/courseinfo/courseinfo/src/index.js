@@ -28,9 +28,9 @@ const Content = (props) => {
 	log("Content", "execution")
 	return (
 		<div>
-			<Part part={props.part[0]} number={props.exercises[0]} />
-			<Part part={props.part[1]} number={props.exercises[1]} />
-			<Part part={props.part[2]} number={props.exercises[2]} />
+			<Part part={props.parts_array[0].name} number={props.parts_array[0].exercises} />
+			<Part part={props.parts_array[1].name} number={props.parts_array[1].exercises} />
+			<Part part={props.parts_array[2].name} number={props.parts_array[2].exercises} />
 		</div>
 	)
 }
@@ -44,14 +44,25 @@ const Total = (props) => {
 
 const App = () => {
   const course = 'Half Stack application development'
-  const parts = ['Fundamentals of React', 'Using props to pass data', 'State of a component']
-  const exercises = [10, 7, 14]
+  const part1 = {
+  	name: 'Fundamentals of React',
+  	exercises: 10
+  }
+  const part2 = {
+  	name: 'Using props to pass data',
+  	exercises: 7
+  }
+  const part3 = {
+  	name: 'State of a component',
+  	exercises: 14
+  }
+
 
   return (
     <div>
       <Header course={course} />
-      <Content part={parts} exercises={exercises} />
-      <Total number={exercises[0] + exercises[1] + exercises[2]} />
+      <Content parts_array={[part1, part2, part3]} />
+      <Total number={part1.exercises + part2.exercises + part3.exercises} />
     </div>
   )
 }
