@@ -42,6 +42,7 @@ const Total = (props) => {
 	)
 }
 
+
 const App = () => {
 	const course = {
 		name: 'Half Stack application development',
@@ -61,7 +62,6 @@ const App = () => {
 		]
 	}
 
-
   return (
     <div>
       <Header course={course} />
@@ -70,5 +70,6 @@ const App = () => {
     </div>
   )
 }
+
 
 ReactDOM.render(<App />, document.getElementById('root'))
