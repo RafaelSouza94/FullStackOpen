@@ -29,19 +29,29 @@ const DisplayAvg = ({value}) => {
 
 const DisplayPct = ({value}) => {
 	return(
-		<p><b>Positive Pct:</b> {value} % </p>
+		<p><b>Positive Pct:</b> {value} %</p>
 	)
 }
 
 const Statistics = ({good, good_name, neutral, neutral_name, bad, bad_name, total, total_name}) => {
+	if (total === 0){
+		return(
+			<p>No feedback given</p>
+		)
+	}
+
 	return(
 		<div>
-			<DisplayStat feedback={good_name} value={good} />
-			<DisplayStat feedback={neutral_name} value={neutral} />
-			<DisplayStat feedback={bad_name} value={bad} />
-			<DisplayStat feedback={total_name} value={total} />
-			<DisplayAvg value={(good - bad) / total} />
-			<DisplayPct value={(good * 100) / total} />
+			<table>
+			<tbody>
+				<tr><td><DisplayStat feedback={good_name} value={good} /></td></tr>
+				<tr><td><DisplayStat feedback={neutral_name} value={neutral} /></td></tr>
+				<tr><td><DisplayStat feedback={bad_name} value={bad} /></td></tr>
+				<tr><td><DisplayStat feedback={total_name} value={total} /></td></tr>
+				<tr><td><DisplayAvg value={(good - bad) / total} /></td></tr>
+				<tr><td><DisplayPct value={(good * 100) / total} /></td></tr>
+			</tbody>
+			</table>
 		</div>
 	)
 }
