@@ -28,8 +28,10 @@ const Content = ({course}) => {
 
 const Total = ({course}) => {
 	//log("Total", "execution")
-	let total = 0
-	course.parts.map(part => total += part.exercises)
+	const initialValue = 0
+	const reducer = (accumulator, item) => accumulator + item.exercises
+	const total = course.parts.reduce(reducer,initialValue)
+	//course.parts.map(part => total += part.exercises)
 	return (
 		<p><b>Number of exercises:</b> {total}</p>
 	)
