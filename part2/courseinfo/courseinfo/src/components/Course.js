@@ -19,17 +19,19 @@ const Content = ({course}) => {
 	//log("Content", "execution")
 	return (
 		<div>
-			<Part part={course.parts[0].name} number={course.parts[0].exercises} />
-			<Part part={course.parts[1].name} number={course.parts[1].exercises} />
-			<Part part={course.parts[2].name} number={course.parts[2].exercises} />
+			{course.parts.map(part => 
+				<Part part={part.name} number={part.exercises} />
+			)}
 		</div>
 	)
 }
 
-const Total = (props) => {
+const Total = ({course}) => {
 	//log("Total", "execution")
+	let total = 0
+	course.parts.map(part => total += part.exercises)
 	return (
-		<p>Number of exercises: {props.course.parts[0].exercises + props.course.parts[1].exercises + props.course.parts[2].exercises}</p>
+		<p><b>Number of exercises:</b> {total}</p>
 	)
 }
 
@@ -38,6 +40,7 @@ const Course = ({course}) => {
 		<div>
 			<Header name={course.name} />
 			<Content course={course} />
+			<Total course={course} />
 		</div>
 	)
 
