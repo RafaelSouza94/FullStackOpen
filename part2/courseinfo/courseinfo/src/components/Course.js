@@ -4,7 +4,7 @@ import React from 'react'
 const Header = ({name}) => {
 	//log("Header", "execution")
 	return (
-		<h1>{name}</h1>
+		<h2>{name}</h2>
 	)
 }
 
@@ -37,12 +37,17 @@ const Total = ({course}) => {
 	)
 }
 
-const Course = ({course}) => {
+const Course = ({courses}) => {
+
 	return( 
 		<div>
-			<Header name={course.name} />
-			<Content course={course} />
-			<Total course={course} />
+			{courses.map(course => 
+				<div>
+					<Header name={course.name} />
+					<Content course={course} />
+					<Total course={course} />
+				</div>
+			)}
 		</div>
 	)
 
