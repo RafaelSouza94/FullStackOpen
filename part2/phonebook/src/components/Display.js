@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Display = ({name}) => {
+const Display = ({name, number}) => {
 	return(
-		<p>{name}</p>
+		<p><b>{name}:</b> {number}</p>
 	)
 }
 
