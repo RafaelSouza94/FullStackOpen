@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Display from './components/Display.js'
+import AddItems from './components/AddItems.js'
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -51,18 +52,8 @@ const App = () => {
       Search: <input value={newSearch} onChange={handleSearchChange} />
       <br />
       <h2>Add New Name</h2>
-      <form>
-        <div>
-          Name: <input value={newName} onChange={handleNameChange} />
-          <br />
-          <br />
-          Number: <input value={newNumber} onChange={handleNumberChange} />
-        </div>
-        <br />
-        <div>
-          <button type="submit" onClick={addName}>add</button>
-        </div>
-      </form>
+      <AddItems newName={newName} handleNameChange={handleNameChange}
+       newNumber={newNumber} handleNumberChange ={handleNumberChange} />
       <h2>Numbers</h2>
       {personsToShow.map(person => 
         <Display key={person.name} name={person.name} number={person.number} />
