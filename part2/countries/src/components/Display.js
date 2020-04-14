@@ -1,7 +1,18 @@
 import React from 'react'
 
-const PrintName = ({name}) => {
-	return(<p><b>Name:</b> {name}</p>)
+const PrintCountry = ({country}) => {
+	return(
+		<div>
+			<p><b>Name:</b> {country.name}</p>
+			<p><b>Capital:</b> {country.capital}</p>
+			<p><b>Population:</b> {country.population}</p>
+			<p><b>Languages:</b></p>
+			<ul>
+				{country.languages.map(lang =>
+					<li key={lang.name}>{lang.name}</li>)}
+			</ul>
+			<img alt="{country.name} flag"  src={country.flag} height='300' width='450' />
+		</div>)
 }
 
 const Display = ({countries}) => {
@@ -16,7 +27,7 @@ const Display = ({countries}) => {
 		return (
 			<div>
 			     {countries.map(country =>
-		    		<PrintName key={country.name} name={country.name} />)}
+		    		<p key={country.name}><b>Name:</b> {country.name}</p>)}
 			</div>
 		)
 	}
@@ -24,8 +35,9 @@ const Display = ({countries}) => {
 	if(countries.length === 1){
 		return (
 			<div>
-			     {countries.map(country =>
-		    		<PrintName key={country.name} name={country.name} />)}
+		    	{countries.map(country =>
+	    			<PrintCountry key={country.name} country={country} />
+	    		)}
 			</div>
 		) 
 	}
