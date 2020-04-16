@@ -44,8 +44,12 @@ const App = () => {
 		noteService
 			.update(id, changedNote)
 			.then(response => {
-				setNotes(notes.map(note => note.id !== id ? note : response))
-		})
+				setNotes(notes.map(note => note.id !== id ? note : response))})
+			.catch(error => {
+				alert(
+					`The note '${note.content}' has been deleted from the server!`)
+				setNotes(notes.filter(n => n.id !== id))
+			})
 	}
 
 	const handleNoteChange = (event) => {

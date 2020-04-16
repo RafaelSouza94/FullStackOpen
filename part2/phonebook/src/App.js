@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Display from './components/Display.js'
 import AddItems from './components/AddItems.js'
+import personsService from './services/book'
 import axios from 'axios'
 
 const App = () => {
@@ -10,11 +11,10 @@ const App = () => {
   const [ newSearch, setNewSearch ] = useState('')
 
   const hook = () => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        console.log("Promise fulfilled")
-        setPersons(response.data)
+    personsService
+      .getAll()
+      .then(persons => {
+        setPersons(persons)
       })
   }
 
@@ -27,7 +27,11 @@ const App = () => {
         name: newName,
         number: newNumber
       }
-      setPersons(persons.concat(personObject))
+      personsService
+        .create(personObject)
+        .then(response => {
+          setPersons(persons.concat(response))
+        })
     }
     else{
       alert(`${newName} is already in the phonebook!`)
@@ -58,7 +62,7 @@ const App = () => {
       <br />
       <h2>Add New Name</h2>
       <AddItems newName={newName} handleNameChange={handleNameChange}
-       newNumber={newNumber} handleNumberChange ={handleNumberChange} />
+       newNumber={newNumber} handleNumberChange ={handleNumberChange} addName={addName} />
       <h2>Numbers</h2>
       {personsToShow.map(person => 
         <Display key={person.name} name={person.name} number={person.number} />
