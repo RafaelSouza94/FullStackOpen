@@ -33,10 +33,35 @@ const App = () => {
         })
     }
     else{
-      alert(`${newName} is already in the phonebook!`)
+      const result = window.confirm(`${newName} is already in the phonebook! Update the number?`)
+      if(result === true){
+        const personObject = {
+          name: newName,
+          number: newNumber
+        }
+        const id = getIdByName(newName)
+        personsService
+          .update(id, personObject)
+          .then(response => {
+            console.log(response)
+          })
+        personsService
+          .getAll()
+          .then(persons => {
+            setPersons(persons)
+          })
+      } 
+      else{
+        return
+      }     
     }
     setNewName('')
     setNewNumber('')
+  }
+
+  const getIdByName = (name) => {
+    const person_id = persons.filter(person => person.name === name)
+    return person_id[0].id
   }
 
   const handleNameChange = (event) => {
