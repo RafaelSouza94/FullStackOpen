@@ -1,8 +1,11 @@
 import React from 'react'
 
-const Display = ({name, number}) => {
+const Display = ({name, number, deleteHandler}) => {
 	return(
-		<p><b>{name}:</b> {number}</p>
+		<div>
+			<p><b>{name}:</b> {number}</p>
+			<button onClick={deleteHandler}>Delete</button>
+		</div>
 	)
 }
 

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import Display from './components/Display.js'
 import AddItems from './components/AddItems.js'
 import personsService from './services/book'
-import axios from 'axios'
 
 const App = () => {
   const [persons, setPersons] = useState([]) 
@@ -52,6 +51,24 @@ const App = () => {
     setNewSearch(event.target.value)
   }
 
+  const deleteUser = (id, name) => {
+    const result = 
+      window.confirm(`Are you sure you wanna delete ${name}?`)
+      if(result === true){
+        personsService
+          .remove(id)
+          .then(response => {
+            console.log(response)
+          })
+        personsService
+          .getAll()
+          .then(persons => {setPersons(persons)})
+      }
+      else{
+        return
+      }
+  }
+
   const personsToShow = newSearch === '' ? persons : persons.filter(
     person => person.name.toLowerCase().includes(newSearch.toLowerCase()))
 
@@ -65,7 +82,8 @@ const App = () => {
        newNumber={newNumber} handleNumberChange ={handleNumberChange} addName={addName} />
       <h2>Numbers</h2>
       {personsToShow.map(person => 
-        <Display key={person.name} name={person.name} number={person.number} />
+        <Display key={person.name} name={person.name}
+          number={person.number} deleteHandler={() => deleteUser(person.id, person.name)}/>
       )}
     </div>
     )
