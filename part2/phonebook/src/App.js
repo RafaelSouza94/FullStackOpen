@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react'
 import Display from './components/Display.js'
 import AddItems from './components/AddItems.js'
 import personsService from './services/book'
+import Success from './components/DisplaySuccess'
 
 const App = () => {
-  const [persons, setPersons] = useState([]) 
+  const [ persons, setPersons ] = useState([]) 
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
   const [ newSearch, setNewSearch ] = useState('')
+  const [ successMessage, setSuccessMessage ] = useState(null)
 
   const hook = () => {
     personsService
@@ -31,6 +33,10 @@ const App = () => {
         .then(response => {
           setPersons(persons.concat(response))
         })
+      setSuccessMessage(`${newName} was added sucessfully!`)
+      setTimeout(() => {
+        setSuccessMessage(null)
+      }, 5000)
     }
     else{
       const result = window.confirm(`${newName} is already in the phonebook! Update the number?`)
@@ -50,6 +56,10 @@ const App = () => {
           .then(persons => {
             setPersons(persons)
           })
+        setSuccessMessage(`${newName}'s number was altered sucessfully!`)
+        setTimeout(() => {
+          setSuccessMessage(null)
+        }, 5000)
       } 
       else{
         return
@@ -100,6 +110,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Success message={successMessage} />
       Search: <input value={newSearch} onChange={handleSearchChange} />
       <br />
       <h2>Add New Name</h2>
