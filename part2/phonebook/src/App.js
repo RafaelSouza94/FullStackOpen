@@ -3,6 +3,7 @@ import Display from './components/Display.js'
 import AddItems from './components/AddItems.js'
 import personsService from './services/book'
 import Success from './components/DisplaySuccess'
+import ErrorDisplay from './components/ErrorDisplay' 
 
 const App = () => {
   const [ persons, setPersons ] = useState([]) 
@@ -10,6 +11,7 @@ const App = () => {
   const [ newNumber, setNewNumber ] = useState('')
   const [ newSearch, setNewSearch ] = useState('')
   const [ successMessage, setSuccessMessage ] = useState(null)
+  const [ errorMessage, setErrorMessage ] = useState(null)
 
   const hook = () => {
     personsService
@@ -49,7 +51,14 @@ const App = () => {
         personsService
           .update(id, personObject)
           .then(response => {
-            console.log(response)
+            console.log(response)})
+          .catch(error => {
+            setErrorMessage(
+              `The person '${newName}' has been deleted from the server!`)
+            setTimeout(() => {
+             setErrorMessage(null)
+             }, 5000)
+            return
           })
         personsService
           .getAll()
